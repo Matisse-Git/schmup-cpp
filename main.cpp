@@ -46,7 +46,7 @@ void InitGame()
     player = playerStart;
     player.SetTexture(&shipTextures, raylib::Rectangle(68, 14, 35, 33));
     player.SetScale(1.5f);
-    player.SetBulletTexture(&bulletTextures, raylib::Rectangle(201, 187, 11, 18), player.GetRotation(), player.GetScale());
+    player.SetBulletsTexture(&bulletTextures, raylib::Rectangle(201, 187, 11, 18), player.GetRotation(), player.GetScale());
 
     backgroundTextures.push_back(
         raylib::Texture2D(raylib::GetWorkingDirectory() + "\\assets\\textures\\ParallaxBackground\\SpaceBackground.png"));
