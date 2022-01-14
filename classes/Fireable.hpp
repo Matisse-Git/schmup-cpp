@@ -18,6 +18,8 @@ class Fireable
     std::vector<Bullet> bullets;
     raylib::Texture2D* bulletTexture;
     raylib::Rectangle bulletSpriteRect;
+    float bulletRotation;
+    float bulletScale;
 
     bool CheckCanFire();
     void DestroyBullet(Bullet bulletToDestroy);

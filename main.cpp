@@ -18,9 +18,9 @@ std::vector<raylib::Texture2D> backgroundTextures;
 Player player;
 Player playerStart(
     raylib::Vector2(GetScreenWidth() / 2, GetScreenHeight() - 150),
-    800,
-    0.5f,
-    1000,
+    500,
+    0.1f,
+    1500,
     10,
     GOOD
 );
@@ -28,7 +28,7 @@ Player playerStart(
 int main()
 {
     // Initialization
-    SetTargetFPS(120);
+    SetTargetFPS(240);
     InitGame();
 
     // Main game loop
@@ -45,7 +45,7 @@ void InitGame()
 {
     player = playerStart;
     player.SetTexture(&shipTextures, raylib::Rectangle(68, 14, 35, 33));
-    player.SetScale(1.5f);
+    player.SetScale(2);
     player.SetBulletsTexture(&bulletTextures, raylib::Rectangle(201, 187, 11, 18), player.GetRotation(), player.GetScale());
 
     backgroundTextures.push_back(

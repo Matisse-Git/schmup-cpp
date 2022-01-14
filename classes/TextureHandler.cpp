@@ -46,5 +46,5 @@ void TextureHandler::DrawTexture(raylib::Vector2 position)
     raylib::Rectangle destRect(position, this->GetSpriteSize());
     raylib::Vector2 origin(this->GetSpriteSize().GetX()/2, this->GetSpriteSize().GetY()/2);
     
-    texture->Draw(this->spriteRect, destRect, origin, this->rotation);
+    this->texture->Draw(this->spriteRect, destRect, origin, this->rotation);
 }

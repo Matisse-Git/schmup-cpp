@@ -17,7 +17,7 @@ Spaceship::Spaceship(raylib::Vector2 position, float speed, float fireRate, floa
 
 void Spaceship::Update()
 {
-    this->UpdateCollisionRect(this->GetPosition());
+    this->UpdateCollisionRect(this->GetPosition() - this->GetSpriteSize()/2);
     this->UpdateBullets();
 }
 

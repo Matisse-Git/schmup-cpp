@@ -41,7 +41,11 @@ void Fireable::Fire(raylib::Vector2 position, raylib::Vector2 direction, EPolari
 {
     if (CheckCanFire())
     {
-        this->bullets.push_back(Bullet(position, this->bulletSpeed, direction, polarity));
+        Bullet newBullet(position, this->bulletSpeed, direction, polarity);
+        newBullet.SetTexture(this->bulletTexture, this->bulletSpriteRect);
+        newBullet.SetScale(this->bulletScale);
+        newBullet.SetRotation(this->bulletRotation);
+        this->bullets.push_back(newBullet);
         this->whenLastFired = GetTime();
     }
 }
@@ -69,13 +73,10 @@ void Fireable::DrawBullets()
 
 void Fireable::SetBulletsTexture(raylib::Texture2D* bulletTexture, raylib::Rectangle bulletSpriteRect, float rotation, float scale)
 {
-    for (int i = 0; i < (int)this->bullets.size(); i++)
-    {
-        Bullet* bullet = &this->bullets.at(i);
-        bullet->SetTexture(bulletTexture, bulletSpriteRect);
-        bullet->SetScale(scale);
-        bullet->SetRotation(rotation);
-    }
+    this->bulletTexture = bulletTexture;
+    this->bulletSpriteRect = bulletSpriteRect;
+    this->bulletRotation = rotation;
+    this->bulletScale = scale;
 }
 
 void Fireable::CheckBulletsCollision(std::vector<Damageable*> targets)

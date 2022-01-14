@@ -1,1 +1,1 @@
-g++ main.cpp classes/*.cpp -o main.exe -O1 -Wall -Wno-missing-braces -I include/ -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+g++ main.cpp classes/*.cpp -o main.exe -g -O1 -Wall -Wno-missing-braces -I include/ -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
