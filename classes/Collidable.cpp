@@ -1,0 +1,35 @@
+#include "raylib-cpp.hpp"
+#include "Collidable.hpp"
+
+Collidable::Collidable(){}
+
+Collidable::Collidable(raylib::Rectangle collisionRect)
+{
+    raylib::Vector2 adjustedPos;
+    adjustedPos.SetX(collisionRect.GetX() - collisionRect.GetWidth()/2);
+    adjustedPos.SetY(collisionRect.GetY() - collisionRect.GetHeight()/2);
+    this->collisionRect = raylib::Rectangle(adjustedPos, collisionRect.GetSize());
+}
+
+bool Collidable::CheckCollision(raylib::Rectangle other)
+{
+    return this->collisionRect.CheckCollision(other);
+}
+
+void Collidable::UpdateCollisionRect(raylib::Vector2 position)
+{
+    raylib::Vector2 adjustedPos;
+    adjustedPos.SetX(position.GetX() - this->collisionRect.GetWidth()/2);
+    adjustedPos.SetY(position.GetY() - this->collisionRect.GetHeight()/2);
+    this->collisionRect.SetPosition(adjustedPos);
+}
+
+raylib::Rectangle Collidable::GetCollisionRect()
+{
+    return this->collisionRect;
+}
+
+void Collidable::DrawCollisionRect(raylib::Color color)
+{
+    color.DrawRectangleLines(this->collisionRect, 5);
+}
