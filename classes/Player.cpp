@@ -26,7 +26,7 @@ void Player::Update()
     this->Move(directionToMove);
 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-        this->Fire(this->GetPosition(), raylib::Vector2(0, -1), this->GetPolarity());
+        this->Fire(raylib::Vector2(this->GetPosition().GetX(), this->GetPosition().GetY() - this->GetSpriteSize().GetY()/2), raylib::Vector2(0, -1), this->GetPolarity());
 }
 
 void Player::Draw()

@@ -15,7 +15,7 @@ Bullet::Bullet(raylib::Vector2 position, float speed, raylib::Vector2 direction,
 void Bullet::Update()
 {
     this->Move(this->direction);
-    this->UpdateCollisionRect(this->GetPosition());
+    this->UpdateCollisionRect(raylib::Rectangle(this->GetPosition(), this->GetSpriteSize()));
 }
 
 void Bullet::Draw()

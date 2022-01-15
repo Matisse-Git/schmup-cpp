@@ -11,7 +11,7 @@ class Collidable
     Collidable();
     Collidable(raylib::Rectangle collisionRect);
 
-    void UpdateCollisionRect(raylib::Vector2 position);
+    void UpdateCollisionRect(raylib::Rectangle collisionRect);
     void DrawCollisionRect(raylib::Color color);
 
   public:

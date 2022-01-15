@@ -27,7 +27,7 @@ void TextureHandler::SetRotation(float rotation)
 
 raylib::Vector2 TextureHandler::GetSpriteSize()
 {
-    raylib::Vector2 spriteSize(this->spriteRect.GetSize().x * this->scale, this->spriteRect.GetSize().y * this->scale);
+    raylib::Vector2 spriteSize(this->spriteRect.GetWidth() * this->scale, this->spriteRect.GetHeight() * this->scale);
     return spriteSize;
 }
 
