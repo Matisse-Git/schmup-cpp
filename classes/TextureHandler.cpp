@@ -48,3 +48,8 @@ void TextureHandler::DrawTexture(raylib::Vector2 position)
     
     this->texture->Draw(this->spriteRect, destRect, origin, this->rotation);
 }
+
+raylib::Texture2D* TextureHandler::GetTexture()
+{
+    return this->texture;
+}

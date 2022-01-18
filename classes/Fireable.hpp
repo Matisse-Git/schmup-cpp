@@ -4,6 +4,7 @@
 #include "Bullet.hpp"
 #include "PolarityHandler.hpp"
 #include "Damageable.hpp"
+#include "Shield.hpp"
 
 //class Damageable;
 
@@ -35,4 +36,5 @@ class Fireable
   public:
     void SetBulletsTexture(raylib::Texture2D* bulletTexture, raylib::Rectangle bulletSpriteRect, float rotation, float scale);
     void CheckBulletsCollision(std::vector<Damageable*> targets);
+    void CheckShieldCollision(std::vector<Shield> shields);
 };

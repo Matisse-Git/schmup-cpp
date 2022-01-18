@@ -1,6 +1,8 @@
 #include "raylib-cpp.hpp"
 #include "classes/Player.hpp"
+#include "classes/Enemy.hpp"
 #include "classes/PolarityHandler.hpp"
+#include "raygui.h"
 
 #include <iostream>
 #include <string>
@@ -13,6 +15,7 @@ static void DrawGame(void);
 raylib::Window window(650, 1000, "schmup cpp");
 raylib::Texture2D shipTextures(raylib::GetWorkingDirectory() + "\\assets\\textures\\ShipTextures.png");
 raylib::Texture2D bulletTextures(raylib::GetWorkingDirectory() + "\\assets\\textures\\BulletTextures.png");
+raylib::Texture2D ShieldTexture(raylib::GetWorkingDirectory() + "\\assets\\textures\\ShieldTexture.png");
 std::vector<raylib::Texture2D> backgroundTextures;
 
 Player player;
@@ -24,6 +27,18 @@ Player playerStart(
     10,
     GOOD
 );
+
+Enemy enemy;
+Enemy enemyStart(
+    raylib::Vector2(GetScreenWidth()/2, 150),
+    400,
+    0.3f,
+    1500,
+    10,
+    GOOD
+);
+
+
 
 int main()
 {
@@ -47,6 +62,13 @@ void InitGame()
     player.SetTexture(&shipTextures, raylib::Rectangle(68, 14, 35, 33));
     player.SetScale(2);
     player.SetBulletsTexture(&bulletTextures, raylib::Rectangle(201, 187, 11, 18), player.GetRotation(), player.GetScale());
+    player.SetShieldTextures(&ShieldTexture, raylib::Rectangle(0, 0, 50, 50), raylib::Rectangle(0, 50, 50, 50));
+
+    enemy = enemyStart;
+    enemy.SetTexture(&shipTextures, raylib::Rectangle(220, 159, 35, 41));
+    enemy.SetScale(2);
+    enemy.SetRotation(180);
+    enemy.SetBulletsTexture(&bulletTextures, raylib::Rectangle(201, 187, 11, 18), enemy.GetRotation(), enemy.GetScale());
 
     backgroundTextures.push_back(
         raylib::Texture2D(raylib::GetWorkingDirectory() + "\\assets\\textures\\ParallaxBackground\\SpaceBackground.png"));
@@ -64,6 +86,12 @@ void InitGame()
 void UpdateGame()
 {
     player.Update();
+    enemy.Update();
+    std::vector<Damageable*> enemies = {&enemy};
+    player.CheckBulletsCollision(enemies);
+    std::vector<Damageable*> players = {&player};
+    enemy.CheckBulletsCollision(players);
+    enemy.CheckShieldCollision({player.GetShield()});
 }
 
 void DrawGame()
@@ -80,6 +108,7 @@ void DrawGame()
         }
         
         player.Draw();
+        enemy.Draw();
         
         DrawFPS(20, 20);
     }

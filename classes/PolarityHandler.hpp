@@ -14,6 +14,7 @@ class PolarityHandler
     PolarityHandler(EPolarity polarity);
 
     void TogglePolarity();
+    void SetPolarity(EPolarity polarity);
 
   public:
     EPolarity GetPolarity();
