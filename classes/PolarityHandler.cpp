@@ -20,3 +20,8 @@ EPolarity PolarityHandler::GetPolarity()
 {
     return this->polarity;
 }
+
+void PolarityHandler::SetPolarity(EPolarity polarity)
+{
+    this->polarity = polarity;
+}

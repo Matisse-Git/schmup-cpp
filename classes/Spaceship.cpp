@@ -26,4 +26,6 @@ void Spaceship::Draw()
     this->DrawBullets();
     this->DrawTexture(this->GetPosition());
     this->DrawCollisionRect(RED);
+    this->DrawHP(raylib::Vector2(this->GetPosition().GetX() + this->GetSpriteSize().GetX()/2 + 10, this->GetPosition().GetY() - 15), RED, 15);
+    raylib::Color(RED).DrawText("Is Dead: " + std::to_string(this->IsDead()), this->GetPosition().GetX() + this->GetSpriteSize().GetX()/2 + 10, this->GetPosition().GetY(), 15);   
 }

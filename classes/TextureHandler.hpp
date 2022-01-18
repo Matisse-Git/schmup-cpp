@@ -13,6 +13,7 @@ class TextureHandler{
     TextureHandler();
 
     void DrawTexture(raylib::Vector2 position);
+    raylib::Texture2D* GetTexture();
 
   public:
     void SetTexture(raylib::Texture2D* texture, raylib::Rectangle spriteRect);

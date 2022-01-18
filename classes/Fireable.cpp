@@ -3,6 +3,7 @@
 #include "Bullet.hpp"
 #include "PolarityHandler.hpp"
 #include "Damageable.hpp"
+#include "Shield.hpp"
 
 #include <vector>
 
@@ -57,7 +58,7 @@ void Fireable::UpdateBullets()
         Bullet* bullet = &this->bullets.at(i);
         bullet->Update();
 
-        if (bullet->GetPosition().GetY() <= -100)
+        if (bullet->GetPosition().GetY() <= -100 || bullet->GetPosition().GetY() >= GetScreenHeight() + 100)
             this->DestroyBullet(*bullet);
     }
 }
@@ -86,7 +87,7 @@ void Fireable::CheckBulletsCollision(std::vector<Damageable*> targets)
         Bullet* bullet = &this->bullets.at(i);
         for (int j = 0; j < (int)targets.size(); j++)
         {
-            Damageable* target = targets.at(i);
+            Damageable* target = targets.at(j);
 
             bool targetHit = bullet->CheckCollision(target->GetCollisionRect());
             
@@ -99,6 +100,27 @@ void Fireable::CheckBulletsCollision(std::vector<Damageable*> targets)
 
                 target->Damage(damageAmount);
                 this->DestroyBullet(*bullet);
+            }
+        }
+    }
+}
+
+
+void Fireable::CheckShieldCollision(std::vector<Shield> shields)
+{
+    for (int i = 0; i < (int)this->bullets.size(); i++)
+    {
+        Bullet* bullet = &this->bullets.at(i);
+        for (int j = 0; j < (int)shields.size(); j++)
+        {
+            Shield shield = shields.at(j);
+
+            bool targetHit = bullet->CheckCollision(shield.GetCollisionRect());
+            
+            if (targetHit)
+            {
+                if (bullet->GetPolarity() == shield.GetPolarity())
+                    this->DestroyBullet(*bullet);
             }
         }
     }
