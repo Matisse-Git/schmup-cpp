@@ -87,11 +87,13 @@ void UpdateGame()
 {
     player.Update();
     enemy.Update();
+    
     std::vector<Damageable*> enemies = {&enemy};
-    player.CheckBulletsCollision(enemies);
     std::vector<Damageable*> players = {&player};
-    enemy.CheckBulletsCollision(players);
+    
+    player.CheckBulletsCollision(enemies);
     enemy.CheckShieldCollision({player.GetShield()});
+    enemy.CheckBulletsCollision(players);
 }
 
 void DrawGame()

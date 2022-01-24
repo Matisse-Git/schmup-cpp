@@ -17,15 +17,15 @@ void Player::Update()
     this->shield.Update(this->GetPosition(), this->GetPolarity());
 
     raylib::Vector2 directionToMove(0, 0);
-    if (IsKeyDown(KEY_W))
+    if (IsKeyDown(KEY_W) && this->GetCollisionRect().GetY() > 0)
         directionToMove.SetY(-1);
-    else if (IsKeyDown(KEY_S))
+    else if (IsKeyDown(KEY_S) && this->GetCollisionRect().GetY() + this->GetCollisionRect().GetHeight() < GetScreenHeight())
         directionToMove.SetY(1);
-    if (IsKeyDown(KEY_A))
+    if (IsKeyDown(KEY_A) && this->GetCollisionRect().GetX() > 0)
         directionToMove.SetX(-1);
-    else if (IsKeyDown(KEY_D))
+    else if (IsKeyDown(KEY_D) && this->GetCollisionRect().GetX() + this->GetCollisionRect().GetWidth() < GetScreenWidth())
         directionToMove.SetX(1);
-    
+
     this->Move(directionToMove);
 
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
